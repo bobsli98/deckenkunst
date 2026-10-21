@@ -275,9 +275,11 @@
   function buildStart() {
     const box = $('#start .karten');
     box.innerHTML = '';
+    // „zuletzt“ nur, wenn wirklich schon einmal eine Stimmung gewählt wurde
+    const remembered = store.get('stimmung');
     for (const g of genres) {
       const b = document.createElement('button');
-      b.className = 'karte' + (g === genre ? ' zuletzt' : '');
+      b.className = 'karte' + (g === genre ? ' aktuell' : '') + (g.id === remembered ? ' zuletzt' : '');
       b.style.setProperty('--a', g.a || '#888');
       b.style.setProperty('--b', g.b || '#ccc');
       const n = pool(g).length;
@@ -304,7 +306,7 @@
     } else {
       $('#start .auto').textContent = 'Esc behält die aktuelle Stimmung';
     }
-    const cur = $('#start .karte.zuletzt') || $('#start .karte');
+    const cur = $('#start .karte.aktuell') || $('#start .karte');
     if (cur) cur.focus({ preventScroll: true });
   }
   function tickCountdown() {
