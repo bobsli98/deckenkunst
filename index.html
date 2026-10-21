@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deckenkunst</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="stage"></div>
+<div id="dim"></div>
+
+<div id="titel"><span class="name"></span><span class="sub"></span></div>
+<div id="toast"></div>
+<div id="hint">Doppelklick oder <b>F</b> für Vollbild · <b>H</b> für Hilfe · <b>Leertaste</b> nächste Welt</div>
+<div id="fps" hidden></div>
+
+<div id="start" class="weg" hidden>
+  <div class="start-inner">
+    <h1>Deckenkunst</h1>
+    <p class="frage">Wonach ist dir heute?</p>
+    <div class="karten"></div>
+    <p class="auto"></p>
+  </div>
+</div>
+
+<div id="help" hidden>
+  <div class="panel">
+    <button class="zu" aria-label="Schliessen">×</button>
+    <h1>Deckenkunst</h1>
+    <p class="lead">Generative Welten für die Zimmerdecke. Jede Szene würfelt ihre Parameter bei jedem Besuch neu aus – keine zwei Abende sehen gleich aus.</p>
+    <div class="spalten">
+      <dl>
+        <dt>Leertaste / →</dt><dd>nächste Szene</dd>
+        <dt>←</dt><dd>vorherige Szene</dd>
+        <dt>1 – 0</dt><dd>Szene direkt wählen</dd>
+        <dt>R</dt><dd>Szene neu würfeln</dd>
+        <dt>L</dt><dd>Szene festhalten</dd>
+        <dt>P</dt><dd>Pause</dd>
+        <dt>F / Doppelklick</dt><dd>Vollbild</dd>
+        <dt>+ / −</dt><dd>Helligkeit</dd>
+        <dt>M</dt><dd>Mikrofon (reagiert auf Musik)</dd>
+        <dt>T</dt><dd>Titel ein/aus</dd>
+        <dt>I</dt><dd>Leistungsanzeige</dd>
+        <dt>Q</dt><dd>Sparmodus für schwache Geräte</dd>
+        <dt>G</dt><dd>Stimmung wechseln</dd>
+        <dt>Maus / Klick</dt><dd>mit der Szene spielen</dd>
+      </dl>
+      <div>
+        <h2>Szenen · <span class="modus"></span></h2>
+        <div class="szenen"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/core.js"></script>
+<script src="js/gl.js"></script>
+<script src="js/scenes/aurora.js"></script>
+<script src="js/scenes/kaustik.js"></script>
+<script src="js/scenes/nebel.js"></script>
+<script src="js/scenes/reaktion.js"></script>
+<script src="js/scenes/schleimpilz.js"></script>
+<script src="js/scenes/bluetenmeer.js"></script>
+<script src="js/scenes/seide.js"></script>
+<script src="js/scenes/koi.js"></script>
+<script src="js/scenes/kaleidoskop.js"></script>
+<script src="js/scenes/attraktor.js"></script>
+<script src="js/scenes/gluehwuermchen.js"></script>
+<script src="js/scenes/galaxie.js"></script>
+<script src="js/scenes/wurmloch.js"></script>
+<script src="js/scenes/interferenz.js"></script>
+<script src="js/scenes/hanami.js"></script>
+<script src="js/scenes/enso.js"></script>
+<script src="js/scenes/schwarm.js"></script>
+<script src="js/scenes/sternspuren.js"></script>
+<script src="js/scenes/quallen.js"></script>
+<script src="js/scenes/harmonograph.js"></script>
+<script src="js/scenes/lavalampe.js"></script>
+<script src="js/scenes/feuerwerk.js"></script>
+<script src="js/scenes/lebenszellen.js"></script>
+<script src="js/scenes/glasdach.js"></script>
+<script src="js/scenes/regenteich.js"></script>
+<script src="js/scenes/schneefall.js"></script>
+<script src="js/scenes/eisblumen.js"></script>
+<script src="js/scenes/wolkenhimmel.js"></script>
+<script src="js/scenes/bambushain.js"></script>
+<script src="js/scenes/komorebi.js"></script>
+<script src="js/scenes/laternenfluss.js"></script>
+<script src="js/scenes/kraniche.js"></script>
+<script src="js/scenes/zeichenregen.js"></script>
+<script src="js/stimmungen.js"></script>
+<script src="js/director.js"></script>
+</body>
+</html>
