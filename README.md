@@ -1,6 +1,7 @@
 # Deckenkunst
 
-Generative Welten für die Zimmerdecke: 33 Szenen in 10 Stimmungen, die sich alle paar Minuten weich ineinander überblenden.
+Generative Welten für die Zimmerdecke: 45 Szenen in 12 Stimmungen, die sich alle paar Minuten weich ineinander überblenden.
+Live ansehen: **https://bobsli98.github.io/deckenkunst/**
 Jede Szene würfelt bei jedem Auftritt ihre Parameter neu aus (Farben, Tageszeit, Formen, Anzahl, Verhalten), deshalb sieht kein Abend aus wie der andere.
 
 ## Starten
@@ -16,19 +17,27 @@ Mit **G** wechselst du die Stimmung jederzeit; die laufende Szene blendet dann w
 
 | Stimmung | Szenen |
 |----------|--------|
-| ✦ Überrasch mich | alle 33 |
-| ☾ Zur Ruhe kommen | Glühwürmchen, Sternspuren, Hanami, Ensō, Tiefsee, Polarlicht, Galaxie, Unter Wasser, Harmonograph, Lavalampe, Bambushain, Wolkenhimmel, Schneefall, Regenteich, Glasdach, Laternenfluss, Kraniche |
-| ☂ Regenwetter | Glasdach im Regen, Regenteich, Unter Wasser, Tiefsee, Laternenfluss |
-| ❄ Winter & Kälte | Schneefall, Eisblumen, Polarlicht, Sternspuren, Galaxie |
-| ☀ Sommer & Wärme | Wolkenhimmel, Komorebi, Glühwürmchen, Feuerwerk, Blütenmeer, Unter Wasser, Koi, Lavalampe |
-| 和 Japan | Hanami bei Nacht, Bambushain, Komorebi, Ensō, Koi-Teich, Blütenmeer, Feuerwerk (Hanabi), Regenteich, Laternenfluss, Tausend Kraniche |
-| ✶ Weltall | Galaxie, Sternennebel, Sternspuren, Wurmloch, Polarlicht, Seltsamer Attraktor |
-| ❦ Lebendige Natur | Schwarm, Tiefsee, Glühwürmchen, Schleimpilz, Reaktion–Diffusion, Koi, Lebenszellen, Kraniche |
-| ◈ Abstrakt & Geometrisch | Kaleidoskop, Interferenz, Harmonograph, Attraktor, Lebenszellen, Reaktion–Diffusion, Seidenstrom, Lavalampe, Sternennebel, Zeichenregen |
-| ♫ Party | Feuerwerk, Wurmloch, Kaleidoskop, Interferenz, Seidenstrom, Schwarm, Lavalampe, Attraktor, Zeichenregen (am besten mit **M** fürs Mikrofon) |
+| ✦ Überrasch mich | alle 45 |
+| ☾ Zur Ruhe kommen | Glühwürmchen, Sternspuren, Hanami, Ensō, Tiefsee, Polarlicht, Galaxie, Unter Wasser, Harmonograph, Lavalampe, Bambushain, Wolkenhimmel, Schneefall, Regenteich, Glasdach, Laternenfluss, Kraniche, Pusteblume, Sternbilder, Unter der Oberfläche, Leuchtender Strand, Tempel im Regen |
+| ☂ Regenwetter | Glasdach im Regen, Regenteich, Tempel im Regen, Neonnacht, Unter Wasser, Tiefsee, Laternenfluss |
+| ❄ Winter & Kälte | Schneefall, Eisblumen, Polarlicht, Sternspuren, Galaxie, Sternbilder |
+| ☀ Sommer & Wärme | Wolkenhimmel, Komorebi, Glühwürmchen, Feuerwerk, Blütenmeer, Unter Wasser, Koi, Lavalampe, Pusteblume, Schmetterlinge, Leuchtender Strand |
+| ≋ Meer & Küste | Leuchtender Strand, Unter der Oberfläche, Unter Wasser, Tiefsee, Koi, Regenteich, Laternenfluss |
+| 和 Japan | Hanami bei Nacht, Bambushain, Komorebi, Ensō, Koi-Teich, Blütenmeer, Feuerwerk (Hanabi), Regenteich, Laternenfluss, Tausend Kraniche, Neonnacht, Tempel im Regen |
+| ✶ Weltall | Galaxie, Sternennebel, Sternspuren, Wurmloch, Polarlicht, Seltsamer Attraktor, Sternbilder, Sternenflug |
+| ❦ Lebendige Natur | Schwarm, Tiefsee, Glühwürmchen, Schleimpilz, Reaktion–Diffusion, Koi, Lebenszellen, Kraniche, Schmetterlinge, Pusteblume |
+| ◈ Abstrakt & Geometrisch | Kaleidoskop, Interferenz, Harmonograph, Attraktor, Lebenszellen, Reaktion–Diffusion, Seidenstrom, Lavalampe, Sternennebel, Zeichenregen, Oszilloskop, Mystify |
+| ▣ Retro & Bildschirmschoner | Synthwave, Oszilloskop, Mystify, Sternenflug, DVD-Logo, Zeichenregen, Lebenszellen |
+| ♫ Party | Feuerwerk, Wurmloch, Kaleidoskop, Interferenz, Seidenstrom, Schwarm, Lavalampe, Attraktor, Zeichenregen, Synthwave, Oszilloskop, Sternenflug, Neonnacht (am besten mit **M** fürs Mikrofon) |
 
 Ein paar Highlights:
 
+- **Neonnacht:** in einer Gasse in Shinjuku liegen und nach oben schauen. Die Fassaden laufen zum Himmelsstreifen zusammen, voller Leuchtschilder mit Kanji und Katakana, die teils flackern oder Lauflichter haben. Dazu fällt Regen. Varianten: Shinjuku im Regen, Dotonbori, Golden Gai.
+- **Tempel im Regen:** unter dem geschwungenen Vordach liegen, mit Sparren, hell bemalten Sparrenenden und grüner Kupferkante. Vom Dachrand tropft Wasser, dahinter liegt der Regenhimmel, und eine Papierlaterne und ein Windglöckchen schwingen.
+- **Unter der Oberfläche:** der Blick vom Meeresgrund nach oben. Der ganze Himmel ist im „Snellschen Fenster“ zusammengedrängt, ringsum herrscht Totalreflexion, und ein Fischschwarm zieht als Schattenriss vorbei.
+- **Leuchtender Strand:** nachts brechen Wellen, und das Plankton darin leuchtet auf. Wer klickt, lässt es aufblitzen.
+- **DVD-Logo:** springt von Wand zu Wand und trifft dank geschickt gewählter Geschwindigkeit tatsächlich ab und zu die Ecke, mit Konfetti.
+- **Sternbilder:** Orion, Großer Wagen, Kassiopeia, Schwan, Skorpion und weitere zeichnen sich mit Namen an den Himmel.
 - **Glasdach im Regen:** Tropfen wirken als kleine Linsen und spiegeln den Himmel kopfüber. Sie wachsen zusammen, rinnen ab und wischen dabei den Beschlag weg. Als Variante gibt es ein Gewitter mit Blitzen.
 - **Hanami bei Nacht:** der Blick von unten in eine Kirschbaumkrone mit Mond, fallenden Blütenblättern und Himmelslaternen, die in die Ferne steigen
 - **Bambushain:** perspektivisch zum Himmel zusammenlaufende Halme, die sich im Wind wiegen. Windböen laufen rundherum durch den Hain.
@@ -73,7 +82,7 @@ Auflösung schrittweise, sobald die Bildrate einbricht. Mit **Q** kannst du jede
 
 An die Adresse lassen sich Parameter anhängen, zum Beispiel `index.html?stimmung=ruhig&dauer=600&titel=0`:
 
-- `stimmung=winter`: direkt mit dieser Stimmung starten, ohne Auswahl (`alle ruhig regen winter sommer japan kosmos leben abstrakt party`)
+- `stimmung=winter`: direkt mit dieser Stimmung starten, ohne Auswahl (`alle ruhig regen winter sommer meer japan kosmos leben abstrakt retro party`)
 - `auswahl=0`: Startbildschirm überspringen und die zuletzt gewählte Stimmung nehmen
 - `dauer=300`: Sekunden pro Szene (Standard 150, ±25 % Zufall)
 - `fade=10`: Dauer der Überblendung in Sekunden (Standard 7)
@@ -119,7 +128,7 @@ Für Canvas-2D- oder eigene WebGL-Szenen lohnt sich ein Blick in `koi.js` oder `
 
 ## Alles in einer Datei
 
-`tools/build-single.ps1` baut `dist/deckenkunst.html`: eine einzige Datei (rund 220 KB), in der CSS und alle Skripte eingebettet sind.
+`tools/build-single.ps1` baut `dist/deckenkunst.html`: eine einzige Datei (rund 300 KB), in der CSS und alle Skripte eingebettet sind.
 Ideal für einen USB-Stick oder den Beamer-Laptop – kopieren, doppelklicken, fertig.
 
 ```powershell
