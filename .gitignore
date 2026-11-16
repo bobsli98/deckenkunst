@@ -1,2 +1,5 @@
 # gebaute Einzeldatei (tools/build-single.ps1)
 dist/
+# Welten (welten/*): Abhängigkeiten und Testbilder
+node_modules/
+welten/*/shots/

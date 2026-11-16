@@ -143,3 +143,7 @@ Nach ein bis zwei Minuten läuft die Seite unter `https://<benutzername>.github.
 Über HTTPS funktionieren Mikrofon und Wachhalten zuverlässig, und die gespeicherten Einstellungen bleiben pro Gerät erhalten.
 (Die Datei `.nojekyll` sorgt dafür, dass GitHub die Dateien unverändert ausliefert.)
 Hinweis: Mit einem kostenlosen GitHub-Konto funktioniert Pages nur bei öffentlichen Repositories.
+
+## Seitenprojekte: begehbare Welten
+
+Im Ordner [`welten/`](welten/) liegen zwei eigenständige 3D-Landschaften zum Durchwandern und Überfliegen, je als einzelne HTML-Datei: **Hanagasumi** (Japan mit Tempeln, Torii und Kirschblüten) und **Noctiluca** (ein leuchtender Mond unter einem Ringplaneten). Sie haben mit der Deckenkunst-App nichts zu tun; Details in [`welten/README.md`](welten/README.md).
