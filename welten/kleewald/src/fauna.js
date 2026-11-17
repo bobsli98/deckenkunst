@@ -316,7 +316,7 @@ export class Giant {
     this.tail = mk(P.tail); this.tail.position.set(0, 0.6, -0.48); this.root.add(this.tail);
     this.legs = HIP.map((h, i) => { const l = mk(i < 2 ? P.legF : P.legB); l.position.set(h[0], h[1], h[2]); this.root.add(l); return l; });
     const tg = new THREE.CylinderGeometry(0.004, 0.006, 1, 6); tg.translate(0, -0.5, 0); tg.rotateX(Math.PI / 2 + 0.3);
-    this.tongue = new THREE.Mesh(tg, new THREE.MeshStandardMaterial({ color: 0xc8506a, roughness: 0.4 }));
+    this.tongue = new THREE.Mesh(tg, patch(new THREE.MeshStandardMaterial({ color: 0xc8506a, roughness: 0.4 }), 'tongue'));
     this.tongue.position.set(0, -0.31, 0.98); this.head.add(this.tongue);
     this.root.scale.setScalar(1000);
     this.root.visible = false;
@@ -388,7 +388,7 @@ export class Particles {
           p.y += sin(uTime * 0.5 * sp + aSeed.z * 20.0) * 0.4 * uDrift;
           p = mod(p - cameraPosition, uBox) - uBox * 0.5 + cameraPosition;
           float dc = length(p - cameraPosition);
-          vFade = (1.0 - smoothstep(uBox.x * 0.36, uBox.x * 0.5, dc)) * step(aSeed.w, uCount) * smoothstep(uSize * 0.8, uSize * 2.5 + 0.5, dc);
+          vFade = (1.0 - smoothstep(uBox.x * 0.36, uBox.x * 0.5, dc)) * step(aSeed.w, uCount) * smoothstep(uSize * 2.0 + 2.0, uSize * 5.0 + 5.0, dc);
           float a1 = uTime * uSpin * (0.5 + aSeed.x) + aSeed.y * 6.28, a2 = uTime * uSpin * 0.7 * (0.5 + aSeed.z) + aSeed.w * 6.28;
           vec3 ax = vec3(cos(a1), sin(a1) * cos(a2), sin(a1) * sin(a2));
           vec3 ay = normalize(cross(ax, vec3(sin(a2), cos(a2), 0.3)));
@@ -490,7 +490,7 @@ export class Particles {
     if (mode !== this.mode) { this.amount = Math.max(0, this.amount - dt * 0.6); if (this.amount <= 0.001) this.mode = mode; }
     else this.amount += (w[mode] * low - this.amount) * (1 - Math.exp(-dt * 0.8));
     const set = (o) => { u.uShape.value = o.shape; u.uBox.value.set(o.box, o.box * 0.6, o.box); u.uSize.value = o.size; u.uFall.value = o.fall; u.uSpin.value = o.spin; u.uDrift.value = o.drift; u.uEmit.value = o.emit; u.uColA.value.setRGB(...o.a); u.uColB.value.setRGB(...o.b); u.uCount.value = this.amount * o.count; };
-    if (this.mode === 0) set({ shape: 1, box: 70, size: 0.22, fall: 0.6, spin: 0.2, drift: 3, emit: 0.6, a: [1.0, 0.86, 0.35], b: [1.0, 0.95, 0.65], count: 0.5 });
+    if (this.mode === 0) set({ shape: 1, box: 90, size: 0.14, fall: 0.4, spin: 0.2, drift: 3, emit: 0.5, a: [1.0, 0.80, 0.25], b: [1.0, 0.90, 0.45], count: 0.18 });
     else if (this.mode === 1) set({ shape: 3, box: 420, size: 7, fall: 2.5, spin: 0.15, drift: 14, emit: 0.4, a: [0.95, 0.95, 0.92], b: [1.0, 1.0, 0.98], count: 0.03 });
     else if (this.mode === 2) set({ shape: 0, box: 900, size: 34, fall: 40, spin: 1.1, drift: 40, emit: 0.15, a: [0.85, 0.36, 0.08], b: [0.9, 0.62, 0.12], count: 0.012 });
     else set({ shape: 2, box: 90, size: 1.6, fall: 14, spin: 0.6, drift: 6, emit: 0.5, a: [0.92, 0.96, 1.0], b: [0.85, 0.92, 1.0], count: 0.6 });

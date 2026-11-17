@@ -130,7 +130,8 @@ export class Sky {
     // fog: morning mist, evening haze
     const morning = t < 12 ? smoothstep(-0.12, 0.05, sy) * (1 - smoothstep(0.12, 0.42, sy)) : 0;
     const evening = t >= 12 ? (1 - smoothstep(0.02, 0.3, sy)) : 0;
-    U.uFogP.value.x = 0.000085 + 0.00005 * evening + 0.00004 * morning + 0.00002 * night;
+    // the air is clear across a garden: only a breath of haze, but ground mist lies between the blades
+    U.uFogP.value.x = (0.000085 + 0.00005 * evening + 0.00004 * morning + 0.00002 * night) * 0.22;
     U.uFogP.value.y = 0.0007 + 0.0036 * morning + 0.0012 * evening + 0.0012 * night;
     U.uFogP.value.z = 55 + 25 * morning;
 

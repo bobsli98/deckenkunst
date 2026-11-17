@@ -164,7 +164,7 @@ export function createWorld(seed) {
         // approach from the downhill side (local +Z points downhill)
         let rot = Math.atan2(-gx, -gz);
         if (Math.hypot(gx, gz) < 4) rot = H(hi, hj, 41) * Math.PI * 2;
-        const r1 = type === 0 ? 90 : type === 1 ? 110 : 34;
+        const r1 = type === 0 ? 200 : type === 1 ? 110 : 34;
         s = { x, z, h: sum / 9 + 0.3, r1, r2: r1 * 1.9 + 30, type, rot, id: key(hi, hj), v: H(hi, hj, 42) };
       }
     }
@@ -257,7 +257,7 @@ export function createWorld(seed) {
       if (s.type === 0 && d < 280) { // the ant road
         const sn = Math.sin(s.rot), cs = Math.cos(s.rot), dx = x - s.x, dz = z - s.z;
         const lx = dx * cs - dz * sn, lz = dx * sn + dz * cs, end = 260;
-        if (lz > 0 && lz < end) g = Math.max(g, (1 - smoothstep(4, 9, Math.abs(lx + 6 * Math.sin(lz * 0.03)))) * (1 - smoothstep(end - 30, end, lz)) * 0.8);
+        if (lz > 0 && lz < end) g = Math.max(g, (1 - smoothstep(12, 26, Math.abs(lx + 6 * Math.sin(lz * 0.03)))) * (1 - smoothstep(end - 30, end, lz)) * 0.8);
       }
       ring = Math.max(ring, smoothstep(s.r1 * 0.9, s.r1 * 1.04, d) * (1 - smoothstep(s.r2 * 0.75, s.r2 * 1.05, d)));
     }
@@ -488,8 +488,8 @@ export function createWorld(seed) {
       }
       if (sw[0] > 0.5) { if (r < 0.03) push(SP.ROCK, x, h - 0.3, z, 0.8 + 3 * r3, r4 * 6.2832, t); continue; }
       if (r < v.clover * 0.42) push(SP.KLEE, x, h - 0.2, z, 0.65 + 0.6 * r3 * (0.5 + 0.5 * v.len), r4 * 6.2832, t);
-      else if (r < v.clover * 0.42 + v.flower * 0.07) push(r2 < 0.55 ? SP.BLUME : SP.LOEWE, x, h - 0.2, z, 0.8 + 0.45 * r3, r4 * 6.2832, t);
-      else if (r < v.clover * 0.42 + v.flower * 0.07 + v.moss * 0.03 + 0.003) push(SP.PILZ, x, h - 0.3, z, 4 + 7 * r3 * r3, r4 * 6.2832, t);
+      else if (r < v.clover * 0.42 + v.flower * 0.04) push(r2 < 0.68 + 0.3 * sw[1] ? SP.BLUME : SP.LOEWE, x, h - 0.2, z, 0.8 + 0.45 * r3, r4 * 6.2832, t);
+      else if (r < v.clover * 0.42 + v.flower * 0.04 + v.moss * 0.03 + 0.003) push(SP.PILZ, x, h - 0.3, z, 4 + 7 * r3 * r3, r4 * 6.2832, t);
       else if (r2 < v.leaf * 0.11) push(SP.BLATT, x, h + 0.2, z, 0.7 + 0.6 * r3, r4 * 6.2832, t);
       else if (r2 > 0.997 - v.leaf * 0.006) push(SP.ZWEIG, x, h + 1, z, 0.6 + 0.8 * r3, r4 * 6.2832, t);
       else if (r3 < 0.01 + 0.25 * (1 - smoothstep(0.55, 0.8, ny)) + 0.05 * (1 - smoothstep(0.3, 1.4, h))) push(SP.ROCK, x, h - 0.4, z, 1 + 6 * r4 * r4 + 18 * (1 - smoothstep(0.5, 0.75, ny)) * r4, r2 * 6.2832, t);

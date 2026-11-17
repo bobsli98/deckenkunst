@@ -1,12 +1,13 @@
 # Welten
 
-Zwei Seitenprojekte neben Deckenkunst: begehbare, endlos prozedural erzeugte 3D-Landschaften, jede als eine einzige HTML-Datei.
+Drei Seitenprojekte neben Deckenkunst: begehbare, endlos prozedural erzeugte 3D-Landschaften, jede als eine einzige HTML-Datei.
 Sie teilen keinen Code mit der Deckenkunst-App und ändern an ihr nichts.
 
 | Welt | Datei | Worum es geht |
 |------|-------|---------------|
 | 花霞 **Hanagasumi** | [`hanagasumi/hanagasumi.html`](hanagasumi/hanagasumi.html) | Japan: Tempel, Pagoden, Torii, Kirschblüten, Bambushaine, Flüsse und Brücken, Ameisenbären mit Strohhut. Tag-Nacht-Zyklus und vier Jahreszeiten. |
 | **Noctiluca** | [`noctiluca/noctiluca.html`](noctiluca/noctiluca.html) | Ein fremder Mond unter einem Ringplaneten: Schirmbäume, Glaskorallen, schwebende Felsen mit Wasserfällen, Sinterterrassen, Ringtore einer verschwundenen Kultur, Himmelswale. Jeden Mittag eine Finsternis, nachts leuchtet alles. Vier Zyklen: Blüte, Glut, Nebel, Frost. |
+| **Kleewald** | [`kleewald/kleewald.html`](kleewald/kleewald.html) | Ein endloser Garten aus der Sicht eines drei Millimeter grossen Wesens: Grashalme wie Hochhäuser, Kleewälder, Löwenzahn, verlorene Murmeln, Münzen und ein Gartenzwerg als Landmarken, Ameisen so gross wie Pferde, echte Bäume als Berge am Horizont – und manchmal zieht ein Ameisenbär vorbei. Morgentau, Makro-Unschärfe, Spieluhr. |
 
 ## Starten
 
@@ -24,12 +25,12 @@ Eine bestimmte Welt öffnest du mit `?seed=Nummer` hinter dem Dateinamen; die zu
 Der Quellcode liegt jeweils in `src/` (three.js, mit esbuild in eine Datei gebündelt):
 
 ```
-cd welten/noctiluca      # oder welten/hanagasumi
+cd welten/kleewald       # oder welten/noctiluca, welten/hanagasumi
 npm ci
-npm run build            # -> dist/index.html, danach nach noctiluca.html kopieren
+npm run build            # -> dist/index.html, danach nach kleewald.html (bzw. noctiluca.html, hanagasumi.html) kopieren
 ```
 
-`tools/shots.mjs` und `tools/play2.mjs` sind Testskripte mit Playwright (Headless-Chromium). Details zum Aufbau von Noctiluca stehen in [`noctiluca/UMSETZUNG.md`](noctiluca/UMSETZUNG.md), die Idee in [`noctiluca/KONZEPT.md`](noctiluca/KONZEPT.md).
+`tools/shots.mjs` und `tools/play2.mjs` sind Testskripte mit Playwright (Headless-Chromium). Details zum Aufbau stehen jeweils in `UMSETZUNG.md`, die Idee in `KONZEPT.md` (für [Noctiluca](noctiluca/KONZEPT.md) und [Kleewald](kleewald/KONZEPT.md)).
 
 ## Bekannte Grenzen
 

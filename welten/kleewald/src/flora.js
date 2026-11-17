@@ -96,14 +96,17 @@ function radialHead(g, r, o) { // flower heads seen from above, mapped onto a di
     for (let i = 0; i < 160; i++) { const a = i * 2.39996, d = Math.sqrt(i / 160) * o.centreR * 0.95; g.fillStyle = i % 3 ? o.centre[2] : o.centre[0]; g.beginPath(); g.arc(128 + Math.cos(a) * d, 128 + Math.sin(a) * d, 2.2, 0, 6.3); g.fill(); }
   }
 }
-function puff(g, r) { // dandelion clock: hundreds of seeds on fine stalks
+function puff(g, r) { // dandelion clock: a soft sphere of seeds on fine stalks
+  const gr = g.createRadialGradient(128, 128, 10, 128, 128, 122);
+  gr.addColorStop(0, 'rgba(225,222,205,0.95)'); gr.addColorStop(0.55, 'rgba(240,240,232,0.75)'); gr.addColorStop(0.85, 'rgba(250,250,245,0.55)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = gr; g.beginPath(); g.arc(128, 128, 122, 0, 6.3); g.fill();
   g.lineCap = 'round';
-  for (let i = 0; i < 150; i++) {
-    const a = r() * 6.2832, L = 85 + r() * 32, x = 128 + Math.cos(a) * L, y = 128 + Math.sin(a) * L;
-    g.strokeStyle = 'rgba(235,235,225,0.55)'; g.lineWidth = 0.9; g.beginPath(); g.moveTo(128, 128); g.lineTo(x, y); g.stroke();
-    for (let k = 0; k < 9; k++) { const b = a + (k - 4) * 0.2; g.strokeStyle = 'rgba(255,255,250,0.8)'; g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(b) * 13, y + Math.sin(b) * 13); g.stroke(); }
+  for (let i = 0; i < 110; i++) {
+    const a = r() * 6.2832, L = 92 + r() * 26, x = 128 + Math.cos(a) * L, y = 128 + Math.sin(a) * L;
+    g.strokeStyle = 'rgba(255,255,250,0.9)'; g.lineWidth = 1.6; g.beginPath(); g.moveTo(128 + Math.cos(a) * 40, 128 + Math.sin(a) * 40); g.lineTo(x, y); g.stroke();
+    for (let k = 0; k < 7; k++) { const b = a + (k - 3) * 0.26; g.lineWidth = 1.4; g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(b) * 12, y + Math.sin(b) * 12); g.stroke(); }
   }
-  g.fillStyle = '#c8b890'; g.beginPath(); g.arc(128, 128, 14, 0, 6.3); g.fill();
+  g.fillStyle = '#b8a070'; g.beginPath(); g.arc(128, 128, 16, 0, 6.3); g.fill();
 }
 function toothLeaf(g, r, cols) { // the lion's tooth: long leaf with backward-pointing lobes
   g.fillStyle = pick(r, cols);
@@ -337,11 +340,11 @@ function buildKlee(lod, seed) {
       G.card(c, sd.clone().multiplyScalar(R * 0.95), d.clone().multiplyScalar(R), r() < 0.5 ? 0 : (r() < 0.5 ? 1 : 3), () => n, (p) => { const s = 0.78 + 0.3 * clamp(p.distanceTo(top) / R, 0, 1); return [s, s, s]; }, 1);
     }
   }
-  if (lod < 2 && r() < 0.8) { // a white clover flower on a taller stalk
+  if (lod < 2 && r() < 0.45) { // a white clover flower on a taller stalk, in summer
     const az = r() * 6.28, stem = branchPath(r, new V3(0, -1, 0), new V3(Math.cos(az) * 0.2, 1, Math.sin(az) * 0.2), 105 + 30 * r(), 0.9, 0.7, lod === 0 ? 4 : 2, 0.15, 0.1);
     G.tube(stem, 4, stemCol, 0.05);
     const top = stem[stem.length - 1].p.clone().add(new V3(0, 7, 0));
-    G.swap = 1;
+    G.swap = 2;
     for (let q = 0; q < 2; q++) { const a = q * 1.5708 + 0.4, ax = new V3(Math.cos(a), 0, Math.sin(a)).multiplyScalar(9); G.card(top, ax, new V3(0, 9, 0), 2, (p) => new V3().subVectors(p, top).normalize(), [1, 1, 1], 0.6); }
     G.card(top, new V3(9, 0, 0), new V3(0, 0, 9), 2, () => UP, [1.05, 1.05, 1.05], 0.6);
     G.swap = 0;
@@ -584,7 +587,7 @@ export function foliageMaterial(tex, key, bend, trans, alphaTest = 0.42, glow = 
 const N1 = [1, 1, 1];
 const SEASON_LOOK = {
   [SP.GRAS]: [[0, [0.95, 1.06, 0.85], [1.08, 1.12, 0.78], 0, 0], [0.12, [0.98, 1.0, 0.72], [1.2, 1.05, 0.6], 0, 0], [0.32, [1.0, 0.95, 0.68], [1.2, 1.0, 0.55], 0, 0], [0.55, [0.85, 0.9, 0.85], [0.95, 0.95, 0.85], 0, 0]],
-  [SP.KLEE]: [[0, N1, [1.05, 1.1, 0.95], 0, 0], [0, [0.95, 1.0, 0.9], [1.05, 1.05, 0.9], 0, 0], [0.25, [1.0, 0.95, 0.8], [1.05, 0.95, 0.75], 0.15, 0], [0.5, [0.85, 0.9, 0.85], N1, 0.45, 0]],
+  [SP.KLEE]: [[0, N1, [1.05, 1.1, 0.95], 0, 0.12], [0, [0.95, 1.0, 0.9], [1.05, 1.05, 0.9], 0, 0.7], [0.25, [1.0, 0.95, 0.8], [1.05, 0.95, 0.75], 0.15, 0.25], [0.5, [0.85, 0.9, 0.85], N1, 0.45, 0]],
   [SP.LOEWE]: [[0, N1, N1, 0, 0.1], [0, N1, [1.05, 1.05, 0.95], 0, 0.65], [0.35, [1.0, 0.95, 0.8], N1, 0.2, 0.95], [0.6, [0.8, 0.8, 0.7], N1, 1.05, 1]],
   [SP.BLUME]: [[0, N1, N1, 0, 0], [0, N1, N1, 0, 0], [0.2, N1, N1, 0.45, 0], [0.5, N1, N1, 1.05, 0]],
   [SP.PILZ]: [[0, N1, N1, 0, 0], [0, N1, N1, 0, 0], [0, [1.05, 1.0, 0.95], N1, 0, 0], [0.4, [0.9, 0.9, 0.95], N1, 0, 0]],

@@ -61,19 +61,23 @@ class Mesh {
 
 // trunk and limbs: bark furrows at this scale are canyons
 function treeWood(v, r) {
-  const M = new Mesh(), bark = (t, an) => { const k = 0.7 + 0.3 * Math.sin(an * 23 + t * 3) * Math.sin(an * 7); return [0.30 * k, 0.26 * k, 0.21 * k]; };
-  const trunkH = v.H * (v.kind === 0 ? 0.42 : 0.9), lean = new V3((r() - 0.5) * 0.08, 1, (r() - 0.5) * 0.08).normalize();
+  // kind 0: an oak-like broadleaf, kind 1: a birch with white bark
+  const birch = v.kind === 1;
+  const M = new Mesh(), bark = birch
+    ? (t, an) => { const m = Math.sin(an * 5 + t * 40) * Math.sin(t * 90 + an * 2) > 0.55 || t < 0.05; return m ? [0.10, 0.09, 0.08] : [0.86, 0.85, 0.80]; }
+    : (t, an) => { const k = 0.7 + 0.3 * Math.sin(an * 23 + t * 3) * Math.sin(an * 7); return [0.30 * k, 0.26 * k, 0.21 * k]; };
+  const trunkH = v.H * (birch ? 0.5 : 0.42), lean = new V3((r() - 0.5) * 0.08, 1, (r() - 0.5) * 0.08).normalize();
   const pts = [];
   for (let i = 0; i <= 12; i++) {
-    const t = i / 12, R = v.rc * (1.25 - 0.45 * t) * (v.kind === 1 ? 1 - 0.75 * t : 1);
+    const t = i / 12, R = v.rc * (1.25 - 0.45 * t) * (birch ? 0.75 : 1);
     pts.push([lean.x * trunkH * t, -200 + t * (trunkH + 200), lean.z * trunkH * t, (an) => R * (1 + 0.06 * Math.sin(an * 9 + t * 4) + 0.03 * Math.sin(an * 23))]);
   }
   M.tube(pts, 28, bark);
   const top = new V3(lean.x * trunkH, trunkH, lean.z * trunkH), ends = [];
-  if (v.kind === 0) { // broad crown on a few great limbs
+  { // the crown rests on a few great limbs
     const n = 6 + Math.floor(r() * 3);
     for (let k = 0; k < n; k++) {
-      const a = k / n * 6.2832 + r() * 0.5, el = 0.45 + 0.5 * r(), L = v.L * (0.55 + 0.35 * r());
+      const a = k / n * 6.2832 + r() * 0.5, el = (birch ? 0.8 : 0.45) + 0.5 * r(), L = v.L * (birch ? 0.45 : 0.55 + 0.35 * r());
       const d = new V3(Math.cos(a) * Math.cos(el), Math.sin(el), Math.sin(a) * Math.cos(el));
       const st = top.clone().addScaledVector(new V3(0, -1, 0), v.H * 0.06 * r());
       const lp = []; const p = st.clone();
@@ -86,19 +90,27 @@ function treeWood(v, r) {
 }
 function treeCrown(v, r, ends, top) {
   const M = new Mesh();
-  if (v.kind === 0) {
-    for (const e of ends) for (let q = 0; q < 3; q++) M.blob(e.x + (r() - 0.5) * v.L * 0.35, e.y + (r() - 0.3) * v.L * 0.25, e.z + (r() - 0.5) * v.L * 0.35, v.L * (0.32 + 0.2 * r()), [0.30, 0.48, 0.16], r, 2);
-    for (let q = 0; q < 6; q++) M.blob(top.x + (r() - 0.5) * v.L * 0.5, top.y + v.L * (0.35 + 0.35 * r()), top.z + (r() - 0.5) * v.L * 0.5, v.L * (0.4 + 0.15 * r()), [0.32, 0.52, 0.18], r, 2);
-  } else { // a spruce: tiers of drooping boughs, dark and evergreen
-    const n = 9;
+  {
+    // many smaller clumps of leaves around the ends of the limbs and over the top: a ragged, airy crown
+    const cc = new V3(top.x, top.y + v.L * 0.45, top.z);
+    const birch = v.kind === 1, base = birch ? [0.30, 0.46, 0.14] : [0.20, 0.36, 0.13];
+    const put = (p, R) => { const k = 0.8 + 0.4 * r(), lo = clamp((p.y - top.y) / (v.L * 1.1), 0, 1); M.blob(p.x, p.y * (birch ? 1 : 1), p.z, R * (birch ? 0.8 : 1), [base[0] * k * (0.7 + 0.4 * lo), base[1] * k * (0.7 + 0.4 * lo), base[2] * k], r, 2); };
+    for (const e of ends) for (let q = 0; q < 7; q++) put(e.clone().add(new V3((r() - 0.5) * v.L * 0.45, (r() - 0.2) * v.L * 0.35, (r() - 0.5) * v.L * 0.45)), v.L * (0.13 + 0.1 * r()));
+    for (let q = 0; q < 70; q++) {
+      const d = new V3(r() - 0.5, (r() - 0.25) * 0.9, r() - 0.5).normalize(), sh = 0.6 + 0.4 * Math.sqrt(r());
+      put(cc.clone().add(new V3(d.x * v.L * (birch ? 0.6 : 0.95) * sh, d.y * v.L * (birch ? 1.1 : 0.75) * sh, d.z * v.L * (birch ? 0.6 : 0.95) * sh)), v.L * (0.14 + 0.12 * r()));
+    }
+  }
+  if (false) { // a spruce: tiers of drooping boughs, dark and evergreen
+    const n = 16;
     for (let k = 0; k < n; k++) {
-      const t = k / (n - 1), y = v.H * (0.28 + 0.7 * t), R = v.L * 0.62 * (1 - t * 0.9) + 300;
+      const t = k / (n - 1), y = v.H * (0.2 + 0.78 * t), R = v.L * 0.6 * Math.pow(1 - t, 0.9) + 250;
       const prof = [];
-      for (let i = 0; i <= 6; i++) { const a = i / 6; prof.push([R * a, y - R * 0.55 * a * a]); }
-      const seg = 24, base = M.p.length / 3;
+      for (let i = 0; i <= 6; i++) { const a = i / 6; prof.push([R * a, y - R * (0.35 * a + 0.5 * a * a)]); }
+      const seg = 72, base = M.p.length / 3;
       for (let i = 0; i <= 6; i++) for (let s = 0; s <= seg; s++) {
-        const an = s / seg * 6.2832, rr = prof[i][0] * (1 + 0.12 * Math.sin(an * 7 + k)), sh = 0.45 + 0.4 * (1 - i / 6);
-        M.v(Math.cos(an) * rr, prof[i][1] + (i === 6 ? 0.08 * R * Math.sin(an * 11) : 0), Math.sin(an) * rr, Math.cos(an) * 0.5, 0.85, Math.sin(an) * 0.5, [0.10 * sh, 0.22 * sh, 0.12 * sh]);
+        const an = s / seg * 6.2832, jag = i === 6 ? 0.22 * Math.abs(Math.sin(an * 9 + k * 1.7)) : 0, rr = prof[i][0] * (1 + 0.12 * Math.sin(an * 7 + k) - jag), sh = (0.45 + 0.4 * (1 - i / 6)) * (0.8 + 0.4 * Math.abs(Math.sin(an * 13 + k)));
+        M.v(Math.cos(an) * rr, prof[i][1] + (i === 6 ? 0.12 * R * Math.sin(an * 11) : 0), Math.sin(an) * rr, Math.cos(an) * 0.5, 0.85, Math.sin(an) * 0.5, [0.07 * sh, 0.15 * sh, 0.08 * sh]);
       }
       for (let i = 0; i < 6; i++) for (let s = 0; s < seg; s++) { const a = base + i * (seg + 1) + s, b = a + seg + 1; M.i.push(a, b, a + 1, a + 1, b, b + 1); }
     }
@@ -213,7 +225,7 @@ export class Giants {
     const r = mulberry32(v.id % 1000003 + 11), g = new THREE.Group();
     g.position.set(v.x, 0, v.z);
     const w = treeWood(v, r), wood = new THREE.Mesh(w.geo, this.wood);
-    const crown = new THREE.Mesh(treeCrown(v, r, w.ends, w.top), v.kind === 0 ? this.leaves : this.everMat);
+    const crown = new THREE.Mesh(treeCrown(v, r, w.ends, w.top), this.leaves);
     for (const m of [wood, crown]) { m.frustumCulled = false; g.add(m); }
     wood.castShadow = true; wood.receiveShadow = true;
     g.updateMatrixWorld(true); g.traverse((o) => { o.matrixAutoUpdate = false; });
@@ -252,7 +264,7 @@ export class Giants {
     const leafy = s.w < 0.5 ? 1 : 0.35;
     for (let k = 0; k < 4; k++) {
       const u = U.uShade.value[k], rec = list[k];
-      if (rec) u.set(rec.it.x, rec.it.z, rec.it.L * (rec.it.kind === 0 ? 1.05 * leafy : 0.65), rec.crownH * 0.85); else u.set(0, 0, 0, 0);
+      if (rec) u.set(rec.it.x, rec.it.z, rec.it.L * (rec.it.kind === 0 ? 1.05 : 0.7) * leafy, rec.crownH * 0.85); else u.set(0, 0, 0, 0);
     }
   }
   clear() { for (const m of [this.trees, this.marks]) { for (const r of m.values()) this.drop(r); m.clear(); } this.tick = 0; }

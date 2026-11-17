@@ -73,7 +73,7 @@ const systems = [];
 const flora = new Flora(ctx); systems.push(flora); ctx.flora = flora;
 const grass = new Grass(ctx); systems.push(grass);
 const structures = new Structures(ctx); systems.push(structures); ctx.structures = structures;
-const fauna = new Fauna(ctx); systems.push(fauna);
+const fauna = new Fauna(ctx); systems.push(fauna); window.__fauna = fauna;
 const particles = new Particles(ctx); systems.push(particles);
 const birds = new Birds(ctx); systems.push(birds); window.__birds = birds; ctx.birds = birds;
 const giant = new Giant(ctx); systems.push(giant); window.__giant = giant;

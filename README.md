@@ -146,4 +146,4 @@ Hinweis: Mit einem kostenlosen GitHub-Konto funktioniert Pages nur bei öffentli
 
 ## Seitenprojekte: begehbare Welten
 
-Im Ordner [`welten/`](welten/) liegen zwei eigenständige 3D-Landschaften zum Durchwandern und Überfliegen, je als einzelne HTML-Datei: **Hanagasumi** (Japan mit Tempeln, Torii und Kirschblüten) und **Noctiluca** (ein leuchtender Mond unter einem Ringplaneten). Sie haben mit der Deckenkunst-App nichts zu tun; Details in [`welten/README.md`](welten/README.md).
+Im Ordner [`welten/`](welten/) liegen drei eigenständige 3D-Landschaften zum Durchwandern und Überfliegen, je als einzelne HTML-Datei: **Hanagasumi** (Japan mit Tempeln, Torii und Kirschblüten), **Noctiluca** (ein leuchtender Mond unter einem Ringplaneten) und **Kleewald** (ein Garten aus der Sicht eines drei Millimeter grossen Wesens). Sie haben mit der Deckenkunst-App nichts zu tun; Details in [`welten/README.md`](welten/README.md).

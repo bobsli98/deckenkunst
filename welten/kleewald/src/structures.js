@@ -13,7 +13,7 @@ const C = {
   zinc: [0.66, 0.70, 0.70], gold: [0.95, 0.74, 0.30], silver: [0.82, 0.83, 0.84], copper: [0.80, 0.48, 0.30], wood: [0.78, 0.60, 0.38],
   pencil: [0.96, 0.78, 0.10], graphite: [0.12, 0.12, 0.13], black: [0.03, 0.03, 0.035], acorn: [0.52, 0.34, 0.14], cap: [0.42, 0.32, 0.18],
   shell: [0.80, 0.68, 0.48], shellDark: [0.42, 0.28, 0.16], paper: [0.94, 0.93, 0.89], ant: [0.30, 0.16, 0.08], match: [0.86, 0.72, 0.50], matchHead: [0.62, 0.08, 0.05],
-  bark: [0.36, 0.27, 0.18], needle: [0.42, 0.28, 0.14],
+  bark: [0.32, 0.24, 0.16], needle: [0.30, 0.20, 0.11],
 };
 
 class Buf {
@@ -201,12 +201,16 @@ function antHill(A, r) {
     const a = k * 0.9 + r() * 0.5, t = 0.25 + 0.5 * r(), rr = 170 * Math.pow(1 - t, 0.75) * 0.99, y = 120 * Math.sin(t * Math.PI / 2) - 4;
     A.rot(0, -a, -Math.PI / 2 + t * 1.4, Math.cos(a) * rr, y, Math.sin(a) * rr); A.disc('paint', 0, 0.6, 0, 6 + 4 * r(), C.black, 10); A.pop();
   }
-  for (let k = 0; k < 45; k++) { // needles and twigs sticking out
-    const a = r() * 6.28, t = r() * 0.85, rr = 170 * Math.pow(1 - t, 0.75), y = 120 * Math.sin(t * Math.PI / 2) - 6, L = 25 + 50 * r();
-    const d = new V3(Math.cos(a) * 0.8, 0.4 + r() * 0.6, Math.sin(a) * 0.8).normalize();
-    const p0 = [Math.cos(a) * rr * 0.92, y, Math.sin(a) * rr * 0.92];
-    A.pipe('paint', [[p0[0], p0[1], p0[2], 1.1], [p0[0] + d.x * L, p0[1] + d.y * L * 0.4, p0[2] + d.z * L, 0.7]], 4, k % 4 ? C.needle : C.bark);
+  const surf = (t) => [170 * Math.pow(1 - t, 0.75), 120 * Math.sin(t * Math.PI / 2) - 4];
+  for (let k = 0; k < 700; k++) { // a thatch of pine needles, bits of twig and grains, lying on the slope
+    const a = r() * 6.28, t = r() * 0.95, [rr, y] = surf(t), L = 18 + 40 * r(), b = a + (r() - 0.5) * 3;
+    const [rr2, y2] = surf(Math.min(0.99, t + (r() - 0.3) * 0.12));
+    const p0 = [Math.cos(a) * rr * 0.99, y + 0.6, Math.sin(a) * rr * 0.99];
+    const p1 = [p0[0] + Math.cos(b) * L, y2 + 1.2 + r() * 3, p0[2] + Math.sin(b) * L];
+    const q = k % 9, col = q === 0 ? C.bark : q < 3 ? [0.55, 0.40, 0.22] : q < 6 ? C.needle : [0.30, 0.20, 0.10];
+    A.pipe('paint', [[p0[0], p0[1], p0[2], q === 0 ? 1.8 : 0.8], [p1[0], p1[1], p1[2], q === 0 ? 1.4 : 0.6]], 4, col, false);
   }
+  for (let k = 0; k < 60; k++) { const a = r() * 6.28, t = r() * 0.9, [rr, y] = surf(t); A.sphere('paint', Math.cos(a) * rr, y + 1, Math.sin(a) * rr, 2 + 3 * r(), 1.5 + 2 * r(), 2 + 3 * r(), [0.45 + 0.2 * r(), 0.40, 0.33], 6, 4); }
   return { dome: { R: 165, H: 116 } };
 }
 function gnome(A, r) {
@@ -424,7 +428,7 @@ function makeMaterials() {
   });
   const gloss = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.22, metalness: 0.0, side: THREE.DoubleSide });
   patch(gloss, 'gloss', (s) => {
-    s.fragmentShader = s.fragmentShader.replace('#include <normal_fragment_maps>', SNOW_PATCH).replace('#include <emissivemap_fragment>', REFLECT('fr * 0.55'));
+    s.fragmentShader = s.fragmentShader.replace('#include <normal_fragment_maps>', SNOW_PATCH).replace('#include <emissivemap_fragment>', REFLECT('fr * 0.28'));
   });
   const glow = new THREE.MeshBasicMaterial({ vertexColors: true });
   patch(glow, 'glow', null);
